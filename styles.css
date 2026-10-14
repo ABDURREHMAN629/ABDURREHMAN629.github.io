@@ -7,9 +7,9 @@
   --line: #232a3b;
   --text: #e8ecf4;
   --muted: #97a1b6;
-  --accent: #f5a524;        /* fills: buttons, markers */
-  --accent-text: #f5a524;   /* accent used as text */
-  --on-accent: #17120a;     /* text on top of the accent fill */
+  --accent: #f5a524;
+  --accent-text: #f5a524;
+  --on-accent: #17120a;
   --accent-2: #4fd1c5;
   --danger: #f07167;
   --bg-rgb: 11, 14, 20;
@@ -103,7 +103,6 @@ h2 { font-size: clamp(1.7rem, 3.4vw, 2.5rem); max-width: 22ch; }
 }
 .theme-toggle:hover { border-color: var(--accent); color: var(--accent-text); }
 .theme-toggle svg { width: 18px; height: 18px; }
-/* Show the icon of the theme the button switches to. */
 .theme-toggle .icon-moon { display: none; }
 :root[data-theme="light"] .theme-toggle .icon-sun { display: none; }
 :root[data-theme="light"] .theme-toggle .icon-moon { display: block; }
@@ -348,7 +347,6 @@ a.thumb { cursor: pointer; }
 .modal-media iframe, .modal-media video { width: 100%; height: 100%; border: 0; display: block; }
 
 /* reveal on scroll */
-/* Hidden only when scripts are running, so the text is always there for search engines. */
 .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s, transform .6s; }
 .js .reveal.in { opacity: 1; transform: none; }
 
@@ -381,3 +379,7 @@ a.thumb { cursor: pointer; }
   .fixes li, .js .reveal { opacity: 1; transform: none; }
   html { scroll-behavior: auto; }
 }
+
+/* private video note */
+.thumb-note { position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; font-family: var(--font-mono); font-size: .72rem; letter-spacing: .04em; text-transform: none; color: var(--muted); }
+.video-note { margin-top: 26px; padding: 14px 18px; border: 1px dashed var(--line); border-radius: var(--radius); color: var(--muted); font-size: .95rem; }

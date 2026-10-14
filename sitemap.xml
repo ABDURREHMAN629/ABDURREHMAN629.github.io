@@ -70,6 +70,32 @@
     </video:video>
   </url>
   <url>
+    <loc>https://abdurrehman629.github.io/projects/ar-fabrics-online-store/</loc>
+    <lastmod>2026-10-14</lastmod>
+    <priority>0.6</priority>
+    <image:image><image:loc>https://abdurrehman629.github.io/images/ar-fabrics.jpg</image:loc></image:image>
+    <video:video>
+      <video:thumbnail_loc>https://abdurrehman629.github.io/images/ar-fabrics.jpg</video:thumbnail_loc>
+      <video:title>AR Fabrics — Clothing Brand Store — demo video</video:title>
+      <video:description>A complete online store and admin panel for a Pakistani printed-womenswear brand: collections, filters, product pages with colours, sizes and stock, a shopping bag, checkout, order tracking and a journal. Fast server-rendered pages built for search engines.</video:description>
+      <video:content_loc>https://abdurrehman629.github.io/videos/ar-fabrics-demo.mp4</video:content_loc>
+      <video:duration>70</video:duration>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://abdurrehman629.github.io/projects/clothebrand-fashion-store/</loc>
+    <lastmod>2026-10-14</lastmod>
+    <priority>0.6</priority>
+    <image:image><image:loc>https://abdurrehman629.github.io/images/clothebrand.jpg</image:loc></image:image>
+    <video:video>
+      <video:thumbnail_loc>https://abdurrehman629.github.io/images/clothebrand.jpg</video:thumbnail_loc>
+      <video:title>ClotheBrand — Fashion Store with Card Payments — demo video</video:title>
+      <video:description>A full-stack clothing store with customer accounts, a product catalogue, cart, Stripe card payments, order history and an admin dashboard for managing products and orders.</video:description>
+      <video:content_loc>https://abdurrehman629.github.io/videos/clothebrand-demo.mp4</video:content_loc>
+      <video:duration>41</video:duration>
+    </video:video>
+  </url>
+  <url>
     <loc>https://abdurrehman629.github.io/projects/toolnest-online-tools/</loc>
     <lastmod>2026-10-14</lastmod>
     <priority>0.6</priority>

@@ -3,7 +3,7 @@
   const $ = (id) => document.getElementById(id);
   const root = document.documentElement;
 
-  // ---- theme (dark by default; the choice is remembered on this device) ----
+  // ---- theme ----
   const themeToggle = $("themeToggle");
   function labelThemeToggle() {
     const next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
@@ -40,8 +40,6 @@
   });
 
   // ---- video pop-up ----
-  // Turns a YouTube / Vimeo / Loom link into an embeddable player URL.
-  // Returns null for local files (mp4, webm...), which play in a <video> tag.
   function embedUrl(url) {
     let m;
     if ((m = url.match(/(?:youtube\.com\/(?:watch\?.*v=|shorts\/|embed\/|live\/)|youtu\.be\/)([\w-]{11})/)))
@@ -85,7 +83,7 @@
   function closeVideo() {
     if (modal.hidden) return;
     modal.hidden = true;
-    media.textContent = ""; // stops playback
+    media.textContent = "";
     document.body.style.overflow = "";
     if (lastFocus) lastFocus.focus();
   }

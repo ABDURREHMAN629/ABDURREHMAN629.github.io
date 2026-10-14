@@ -31,7 +31,6 @@
   <link rel="manifest" href="/site.webmanifest">
   <link rel="alternate" type="application/rss+xml" title="Abdur Rehman — Blog" href="/feed.xml">
   <script>
-    // Dark is the default. Apply a saved choice before the page paints, so it never flashes.
     document.documentElement.classList.add("js");
     try { if (localStorage.getItem("theme") === "light") document.documentElement.setAttribute("data-theme", "light"); } catch (e) {}
   </script>
@@ -64,7 +63,7 @@
       <p class="eyebrow">AI · Factory production line</p>
       <h1>AI Machine-Safety Interlock</h1>
       <p class="lead">Cameras watch a production line and, when a person is somewhere unsafe, the machine near them is stopped through the PLC. One batched detection pass covers 15 cameras and controls two machines independently. Mask zones separate &quot;outside the plant wall&quot; from &quot;allowed to stand here&quot;, and the design is fail-safe: when in doubt, stop.</p>
-      
+      <p class="video-note">🔒 Demo video not available for privacy reasons.</p>
       <div class="prose">
         <h2>The problem</h2><p>People get hurt by machines in a predictable way: someone reaches in to clear a jam while the machine is running. Guards get removed, light curtains cannot tell a person from material, and CCTV only records what already happened.</p>
 <h2>How it works</h2><ul><li>Cameras send live video of the machine area</li><li>A YOLOv8 model finds people in each frame — people, not just movement</li><li>Each detection is tested against the marked danger zones</li><li>When a person is inside a zone, a stop signal is sent to the machine through the PLC</li></ul>
