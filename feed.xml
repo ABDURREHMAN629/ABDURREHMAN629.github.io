@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Abdur Rehman — ERP, Automation &amp; AI Articles</title>
+  <link>https://abdurrehman629.github.io/blog/</link>
+  <atom:link href="https://abdurrehman629.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+  <description>ERP developer in Pakistan building custom ERP software, AI assistants and automation for factories. See live projects, demo videos and real results.</description>
+  <language>en</language>
+  <item>
+    <title>7 Signs Your Factory Has Outgrown Excel and Microsoft Access</title>
+    <link>https://abdurrehman629.github.io/blog/signs-your-factory-has-outgrown-excel-and-access/</link>
+    <guid>https://abdurrehman629.github.io/blog/signs-your-factory-has-outgrown-excel-and-access/</guid>
+    <pubDate>Mon, 12 Oct 2026 19:00:00 GMT</pubDate>
+    <description>Excel and Access work well for a small business. These seven signs show when they have started to cost you time, money and trust in your own numbers.</description>
+  </item>
+  <item>
+    <title>MS Access to MySQL Migration Without Losing Data</title>
+    <link>https://abdurrehman629.github.io/blog/ms-access-to-mysql-migration/</link>
+    <guid>https://abdurrehman629.github.io/blog/ms-access-to-mysql-migration/</guid>
+    <pubDate>Mon, 12 Oct 2026 19:00:00 GMT</pubDate>
+    <description>A real Microsoft Access to MySQL migration for a textile mill. What broke, how I fixed it, and the one rule that made the migration safe to run again and again.</description>
+  </item>
+  <item>
+    <title>What a Textile Mill ERP Must Track: From Greige to Dispatch</title>
+    <link>https://abdurrehman629.github.io/blog/textile-mill-erp-what-it-must-track/</link>
+    <guid>https://abdurrehman629.github.io/blog/textile-mill-erp-what-it-must-track/</guid>
+    <pubDate>Mon, 12 Oct 2026 19:00:00 GMT</pubDate>
+    <description>A textile processing mill is not a normal inventory business. Here is what an ERP has to track at every stage, from greige fabric receipt to packing and dispatch.</description>
+  </item>
+  <item>
+    <title>Custom ERP vs Ready-Made Software: How to Choose</title>
+    <link>https://abdurrehman629.github.io/blog/custom-erp-vs-ready-made-software/</link>
+    <guid>https://abdurrehman629.github.io/blog/custom-erp-vs-ready-made-software/</guid>
+    <pubDate>Mon, 12 Oct 2026 19:00:00 GMT</pubDate>
+    <description>Ready-made ERP is faster to start. Custom ERP fits the way you really work. A plain guide to choosing the right one for a growing factory or business.</description>
+  </item>
+  <item>
+    <title>Adding an AI Assistant to an ERP: What Really Works</title>
+    <link>https://abdurrehman629.github.io/blog/ai-assistant-inside-erp/</link>
+    <guid>https://abdurrehman629.github.io/blog/ai-assistant-inside-erp/</guid>
+    <pubDate>Mon, 12 Oct 2026 19:00:00 GMT</pubDate>
+    <description>How I built an assistant that answers staff questions from live ERP data by text or voice, keeps every permission, and never guesses a number.</description>
+  </item>
+  <item>
+    <title>Who Changed That Number? User Roles and Audit Trails in an ERP</title>
+    <link>https://abdurrehman629.github.io/blog/erp-user-roles-and-audit-trail/</link>
+    <guid>https://abdurrehman629.github.io/blog/erp-user-roles-and-audit-trail/</guid>
+    <pubDate>Mon, 12 Oct 2026 19:00:00 GMT</pubDate>
+    <description>One shared login is the most expensive shortcut in a business system. How proper user roles, server-side permissions and an audit trail protect your numbers.</description>
+  </item>
+  <item>
+    <title>A Backup You Have Never Tested Is Not a Backup</title>
+    <link>https://abdurrehman629.github.io/blog/erp-database-backup/</link>
+    <guid>https://abdurrehman629.github.io/blog/erp-database-backup/</guid>
+    <pubDate>Mon, 12 Oct 2026 19:00:00 GMT</pubDate>
+    <description>How to back up a business database properly: automatic, verified, off-site and cleaned up. The five-step nightly backup I run for a live factory ERP.</description>
+  </item>
+  <item>
+    <title>What Decides the Cost of Custom ERP Software?</title>
+    <link>https://abdurrehman629.github.io/blog/what-decides-custom-erp-cost/</link>
+    <guid>https://abdurrehman629.github.io/blog/what-decides-custom-erp-cost/</guid>
+    <pubDate>Mon, 12 Oct 2026 19:00:00 GMT</pubDate>
+    <description>Custom ERP has no fixed price list. These eight things decide what yours will cost, and here is how to keep the cost down without getting a weaker system.</description>
+  </item>
+  <item>
+    <title>Why I Built a Factory ERP on React, Express and MySQL</title>
+    <link>https://abdurrehman629.github.io/blog/react-express-mysql-erp-architecture/</link>
+    <guid>https://abdurrehman629.github.io/blog/react-express-mysql-erp-architecture/</guid>
+    <pubDate>Mon, 12 Oct 2026 19:00:00 GMT</pubDate>
+    <description>The architecture behind a live textile mill ERP: three options I considered, why boring technology won, and the single-server decision that mattered most.</description>
+  </item>
+  <item>
+    <title>How Much Is Where? Modelling a Multi-Stage Production Flow</title>
+    <link>https://abdurrehman629.github.io/blog/production-flow-data-model-and-transactions/</link>
+    <guid>https://abdurrehman629.github.io/blog/production-flow-data-model-and-transactions/</guid>
+    <pubDate>Mon, 12 Oct 2026 19:00:00 GMT</pubDate>
+    <description>The hardest part of a production ERP is not the code. It is the data model, and the transactions that stop a half-saved entry from quietly corrupting your reports.</description>
+  </item>
+</channel>
+</rss>

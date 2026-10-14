@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Backup You Have Never Tested Is Not a Backup</title>
+  <meta name="description" content="How to back up a business database properly: automatic, verified, off-site and cleaned up. The five-step nightly backup I run for a live factory ERP.">
+  <meta name="keywords" content="ERP database backup, MySQL backup strategy, automatic database backup, verified backup, off-site backup, mysqldump">
+  <meta name="author" content="Abdur Rehman">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1, max-snippet:-1">
+  <link rel="canonical" href="https://abdurrehman629.github.io/blog/erp-database-backup/">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#0b0e14">
+  
+  
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Abdur Rehman">
+  <meta property="og:title" content="A Backup You Have Never Tested Is Not a Backup">
+  <meta property="og:description" content="How to back up a business database properly: automatic, verified, off-site and cleaned up. The five-step nightly backup I run for a live factory ERP.">
+  <meta property="og:url" content="https://abdurrehman629.github.io/blog/erp-database-backup/">
+  <meta property="og:image" content="https://abdurrehman629.github.io/images/og-image.jpg">
+  <meta property="og:locale" content="en_US">
+  <meta property="article:published_time" content="2026-10-13T00:00:00+05:00">
+  <meta property="article:author" content="Abdur Rehman">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="A Backup You Have Never Tested Is Not a Backup">
+  <meta name="twitter:description" content="How to back up a business database properly: automatic, verified, off-site and cleaned up. The five-step nightly backup I run for a live factory ERP.">
+  <meta name="twitter:image" content="https://abdurrehman629.github.io/images/og-image.jpg">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="alternate" type="application/rss+xml" title="Abdur Rehman — Blog" href="/feed.xml">
+  <script>
+    // Dark is the default. Apply a saved choice before the page paints, so it never flashes.
+    document.documentElement.classList.add("js");
+    try { if (localStorage.getItem("theme") === "light") document.documentElement.setAttribute("data-theme", "light"); } catch (e) {}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://abdurrehman629.github.io/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://abdurrehman629.github.io/blog/"},{"@type":"ListItem","position":3,"name":"A Backup You Have Never Tested Is Not a Backup","item":"https://abdurrehman629.github.io/blog/erp-database-backup/"}]},{"@type":"BlogPosting","@id":"https://abdurrehman629.github.io/blog/erp-database-backup/#article","mainEntityOfPage":"https://abdurrehman629.github.io/blog/erp-database-backup/","headline":"A Backup You Have Never Tested Is Not a Backup","description":"How to back up a business database properly: automatic, verified, off-site and cleaned up. The five-step nightly backup I run for a live factory ERP.","datePublished":"2026-10-13T00:00:00+05:00","dateModified":"2026-10-13T00:00:00+05:00","author":{"@id":"https://abdurrehman629.github.io/#person"},"publisher":{"@id":"https://abdurrehman629.github.io/#person"},"image":"https://abdurrehman629.github.io/images/og-image.jpg","keywords":"ERP database backup, MySQL backup strategy, automatic database backup, verified backup, off-site backup, mysqldump","wordCount":576,"inLanguage":"en"},{"@type":"Person","@id":"https://abdurrehman629.github.io/#person","name":"Abdur Rehman","url":"https://abdurrehman629.github.io/","image":"https://abdurrehman629.github.io/images/profile.jpg","jobTitle":"ERP Developer and AI & Automation Engineer","sameAs":["https://www.linkedin.com/in/abdur-rehman-ar03247440629","https://github.com/ABDURREHMAN629"]}]}</script>
+  
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav" id="nav">
+    <a href="/" class="brand" aria-label="Abdur Rehman — home"><span class="brand-mark">AR</span><span>Abdur Rehman</span></a>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode" title="Switch to light mode"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+    <nav class="nav-links" id="navLinks" aria-label="Main">
+      <a href="/#problems">Solutions</a>
+      <a href="/#services">Services</a>
+      <a href="/#work">Work</a>
+      <a href="/blog/">Blog</a>
+      <a href="/#about">About</a>
+      <a href="/#contact" class="btn btn-small">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <article class="section article">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/blog/">Blog</a><span aria-hidden="true">/</span><span aria-current="page">A Backup You Have Never Tested Is Not a Backup</span></nav>
+      <p class="eyebrow">13 October 2026 · 3 min read</p>
+      <h1>A Backup You Have Never Tested Is Not a Backup</h1>
+      <p class="lead">How to back up a business database properly: automatic, verified, off-site and cleaned up. The five-step nightly backup I run for a live factory ERP.</p>
+      <div class="prose">
+        <p>Ask a business owner whether their data is backed up and most will say yes. Ask when someone last opened a backup and checked it, and the room goes quiet.</p>
+<p>Before the mill's ERP existed, years of production records lived in one file on one computer. A single failed disk would have taken all of it. When I built the new system, the backup was not an extra. It was part of the design.</p>
+<h2 id="what-usually-goes-wrong">What usually goes wrong</h2>
+<ul><li><strong>The backup depends on a person.</strong> It works until that person is busy, ill or on leave.</li><li><strong>The copy is on the same computer.</strong> A dead disk, a fire or a theft takes the data and its backup together.</li><li><strong>Nobody checks the file.</strong> A backup cut short by a dropped connection still has a normal-looking name and size.</li><li><strong>Copies pile up for ever</strong>, the disk fills, and new backups quietly stop.</li></ul>
+<p>I have seen a backup job fail every night for days because one small tool was missing on the server. Nothing looked wrong. No error appeared on any screen. That is what makes backup failures dangerous: you find out on the day you need the backup.</p>
+<h2 id="the-nightly-backup-i-run">The nightly backup I run</h2>
+<p>Every night, with no person involved, a script does five things.</p>
+<h3 id="1-take-a-consistent-copy-without-stopping-work">1. Take a consistent copy without stopping work</h3>
+<p>The database is copied as one consistent snapshot. Nobody is locked out, and the copy does not contain half-saved entries.</p>
+<h3 id="2-compress-it">2. Compress it</h3>
+<p>The copy is compressed so it is small enough to move and keep.</p>
+<h3 id="3-verify-it">3. Verify it</h3>
+<p>This is the step most setups skip. The script checks that the file is complete and can be read. A broken backup is found tonight, not in six months.</p>
+<h3 id="4-send-it-off-site">4. Send it off-site</h3>
+<p>The verified file is uploaded to cloud storage away from the factory. If the server room is lost, the data is not.</p>
+<h3 id="5-remove-old-copies">5. Remove old copies</h3>
+<p>Copies older than 30 days are deleted automatically, so the storage never fills up.</p>
+<h2 id="two-details-that-matter-more-than-they-look">Two details that matter more than they look</h2>
+<p><strong>The backup is started by the operating system, not by the application.</strong> If the ERP itself is down, the backup still runs. A backup that only works when everything else is working is not much of a backup.</p>
+<p><strong>The system shows the backup status.</strong> An administrator can see when the last good backup ran. Silence is not treated as success.</p>
+<h2 id="the-3-2-1-rule-in-plain-words">The 3-2-1 rule, in plain words</h2>
+<ul><li>Keep <strong>3</strong> copies of your data</li><li>On <strong>2</strong> different kinds of storage</li><li>With <strong>1</strong> copy somewhere else</li></ul>
+<p>It is an old rule and it still works.</p>
+<h2 id="test-the-restore">Test the restore</h2>
+<p>Once in a while, take last night's backup and restore it on another machine. Open a report you know well and compare the numbers. Until you have done this, you have a file, not a backup.</p>
+<h2 id="a-five-minute-check-for-your-business">A five-minute check for your business</h2>
+<ol><li>Where is your backup right now?</li><li>Does it run without anyone remembering?</li><li>Is a copy kept outside the building?</li><li>Has anyone ever restored from it?</li><li>Who is told when it fails?</li></ol>
+<p>If you could not answer all five, your business is carrying a risk that is cheap to remove. The full setup is described in the <a href="/projects/erp-reporting-backup-automation/">reporting, backup and audit project</a>. If you want this for your own database, <a href="/#contact">tell me what you run today</a>.</p>
+      </div>
+      <aside class="author card">
+        <div class="avatar avatar-small"><img src="/images/profile.jpg" alt="Abdur Rehman" width="520" height="520" loading="lazy"></div>
+        <div>
+          <p class="footer-head">Written by Abdur Rehman</p>
+          <p>ERP Developer and AI &amp; Automation Engineer. I built and run the ERP of a working textile mill, and I build ERP software, AI assistants and automation for other businesses.</p>
+          <p><a href="/#contact">Tell me about your problem →</a> · <a href="/#work">See my projects →</a></p>
+        </div>
+      </aside>
+    </article>
+    <section class="section">
+      <div class="section-head"><p class="eyebrow">Keep reading</p><h2>More articles</h2></div>
+      <div class="grid posts"><article class="card post-card reveal">
+          <p class="service-num">13 October 2026 · 3 min read</p>
+          <h3><a href="/blog/signs-your-factory-has-outgrown-excel-and-access/">7 Signs Your Factory Has Outgrown Excel and Microsoft Access</a></h3>
+          <p>Excel and Access work well for a small business. These seven signs show when they have started to cost you time, money and trust in your own numbers.</p>
+          <a class="more" href="/blog/signs-your-factory-has-outgrown-excel-and-access/">Read article →</a>
+        </article><article class="card post-card reveal">
+          <p class="service-num">13 October 2026 · 3 min read</p>
+          <h3><a href="/blog/ms-access-to-mysql-migration/">MS Access to MySQL Migration Without Losing Data</a></h3>
+          <p>A real Microsoft Access to MySQL migration for a textile mill. What broke, how I fixed it, and the one rule that made the migration safe to run again and again.</p>
+          <a class="more" href="/blog/ms-access-to-mysql-migration/">Read article →</a>
+        </article><article class="card post-card reveal">
+          <p class="service-num">13 October 2026 · 4 min read</p>
+          <h3><a href="/blog/textile-mill-erp-what-it-must-track/">What a Textile Mill ERP Must Track: From Greige to Dispatch</a></h3>
+          <p>A textile processing mill is not a normal inventory business. Here is what an ERP has to track at every stage, from greige fabric receipt to packing and dispatch.</p>
+          <a class="more" href="/blog/textile-mill-erp-what-it-must-track/">Read article →</a>
+        </article></div>
+    </section>
+    <section class="section contact" id="contact">
+      <p class="eyebrow">Contact</p>
+      <h2>Tell me the problem. I will show you the fix.</h2>
+      <p class="contact-sub">Describe what is going wrong in your business or your current system. I will reply with how I would solve it.</p>
+      <div class="contact-actions"><a class="btn" href="https://www.linkedin.com/in/abdur-rehman-ar03247440629" target="_blank" rel="noopener">Connect on LinkedIn ↗</a><a class="btn btn-ghost" href="mailto:gabdurrehman493@gmail.com" target="_blank" rel="noopener">Email me</a><a class="btn btn-ghost" href="https://wa.me/923247440629" target="_blank" rel="noopener">WhatsApp</a><a class="btn btn-ghost" href="https://github.com/ABDURREHMAN629" target="_blank" rel="noopener">GitHub</a><a class="btn btn-ghost" href="/files/Abdur-Rehman-CV.pdf" target="_blank" rel="noopener">Download CV</a></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <p class="footer-name">Abdur Rehman</p>
+        <p>ERP Developer and AI &amp; Automation Engineer. Custom ERP software, AI assistants and automation for factories and businesses in Pakistan and worldwide.</p>
+        <p>Shahkot, Nankana Sahib, Pakistan · <a href="https://wa.me/923247440629" target="_blank" rel="noopener">+92 324 7440629</a> · <a href="mailto:gabdurrehman493@gmail.com">gabdurrehman493@gmail.com</a></p>
+      </div>
+      <nav aria-label="Projects">
+        <p class="footer-head">Projects</p>
+        <a href="/projects/textile-mill-erp/">Textile Mill ERP</a>
+        <a href="/projects/erp-ai-assistant/">ERP Assistant — Ask the System by Text or Voice</a>
+        <a href="/projects/ai-machine-safety-system/">AI Machine-Safety Interlock</a>
+        <a href="/projects/erp-reporting-backup-automation/">Reporting, Backup &amp; Audit Automation</a>
+        <a href="/projects/access-to-mysql-migration/">Legacy Access to MySQL Migration</a>
+        <a href="/projects/ar-developer-mesh-private-network/">AR-Developer Mesh — Private Network</a>
+      </nav>
+      <nav aria-label="Articles">
+        <p class="footer-head">Articles</p>
+        <a href="/blog/signs-your-factory-has-outgrown-excel-and-access/">7 Signs Your Factory Has Outgrown Excel and Microsoft Access</a>
+        <a href="/blog/ms-access-to-mysql-migration/">MS Access to MySQL Migration Without Losing Data</a>
+        <a href="/blog/textile-mill-erp-what-it-must-track/">What a Textile Mill ERP Must Track: From Greige to Dispatch</a>
+        <a href="/blog/custom-erp-vs-ready-made-software/">Custom ERP vs Ready-Made Software: How to Choose</a>
+        <a href="/blog/ai-assistant-inside-erp/">Adding an AI Assistant to an ERP: What Really Works</a>
+        <a href="/blog/">All articles →</a>
+      </nav>
+    </div>
+    <div class="footer-bar"><span>© 2026 Abdur Rehman. All rights reserved.</span><a href="#main">Back to top ↑</a></div>
+  </footer>
+
+  <div class="modal" id="videoModal" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-bar"><span id="modalTitle"></span><button class="modal-close" data-close aria-label="Close video">✕</button></div>
+      <div class="modal-media" id="modalMedia"></div>
+    </div>
+  </div>
+  <script src="/main.js" defer></script>
+</body>
+</html>

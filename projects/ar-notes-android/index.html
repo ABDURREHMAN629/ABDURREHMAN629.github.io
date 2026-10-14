@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AR Notes — Notes, Lists and Reminders | Abdur Rehman</title>
+  <meta name="description" content="A notes app for Android with checklists, colours, labels and reminders that work without a calendar app. It imports notes from Google Keep, has five…">
+  <meta name="keywords" content="Android, Capacitor, JavaScript, Offline-first">
+  <meta name="author" content="Abdur Rehman">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1, max-snippet:-1">
+  <link rel="canonical" href="https://abdurrehman629.github.io/projects/ar-notes-android/">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#0b0e14">
+  
+  
+  <meta property="og:type" content="video.other">
+  <meta property="og:site_name" content="Abdur Rehman">
+  <meta property="og:title" content="AR Notes — Notes, Lists and Reminders | Abdur Rehman">
+  <meta property="og:description" content="A notes app for Android with checklists, colours, labels and reminders that work without a calendar app. It imports notes from Google Keep, has five…">
+  <meta property="og:url" content="https://abdurrehman629.github.io/projects/ar-notes-android/">
+  <meta property="og:image" content="https://abdurrehman629.github.io/images/ar-notes.jpg">
+  <meta property="og:locale" content="en_US">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AR Notes — Notes, Lists and Reminders | Abdur Rehman">
+  <meta name="twitter:description" content="A notes app for Android with checklists, colours, labels and reminders that work without a calendar app. It imports notes from Google Keep, has five…">
+  <meta name="twitter:image" content="https://abdurrehman629.github.io/images/ar-notes.jpg">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="alternate" type="application/rss+xml" title="Abdur Rehman — Blog" href="/feed.xml">
+  <script>
+    // Dark is the default. Apply a saved choice before the page paints, so it never flashes.
+    document.documentElement.classList.add("js");
+    try { if (localStorage.getItem("theme") === "light") document.documentElement.setAttribute("data-theme", "light"); } catch (e) {}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://abdurrehman629.github.io/"},{"@type":"ListItem","position":2,"name":"Work","item":"https://abdurrehman629.github.io/#work"},{"@type":"ListItem","position":3,"name":"AR Notes — Notes, Lists and Reminders","item":"https://abdurrehman629.github.io/projects/ar-notes-android/"}]},{"@type":"CreativeWork","@id":"https://abdurrehman629.github.io/projects/ar-notes-android/#work","name":"AR Notes — Notes, Lists and Reminders","headline":"AR Notes — Notes, Lists and Reminders","description":"A notes app for Android with checklists, colours, labels and reminders that work without a calendar app. It imports notes from Google Keep, has five visual styles with light and dark mode, and keeps every note on the phone with backup and restore.","url":"https://abdurrehman629.github.io/projects/ar-notes-android/","author":{"@id":"https://abdurrehman629.github.io/#person"},"creator":{"@id":"https://abdurrehman629.github.io/#person"},"keywords":"Android, Capacitor, JavaScript, Offline-first","image":"https://abdurrehman629.github.io/images/ar-notes.jpg","inLanguage":"en"},{"@type":"VideoObject","name":"AR Notes — Notes, Lists and Reminders — demo video","description":"A notes app for Android with checklists, colours, labels and reminders that work without a calendar app. It imports notes from Google Keep, has five visual styles with light and dark mode, and keeps every note on the phone with backup and restore.","thumbnailUrl":["https://abdurrehman629.github.io/images/ar-notes.jpg"],"uploadDate":"2026-10-13T00:00:00+05:00","duration":"PT1M4S","contentUrl":"https://abdurrehman629.github.io/videos/ar-notes-demo.mp4","embedUrl":"https://abdurrehman629.github.io/projects/ar-notes-android/"},{"@type":"Person","@id":"https://abdurrehman629.github.io/#person","name":"Abdur Rehman","url":"https://abdurrehman629.github.io/"}]}</script>
+  
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav" id="nav">
+    <a href="/" class="brand" aria-label="Abdur Rehman — home"><span class="brand-mark">AR</span><span>Abdur Rehman</span></a>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode" title="Switch to light mode"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+    <nav class="nav-links" id="navLinks" aria-label="Main">
+      <a href="/#problems">Solutions</a>
+      <a href="/#services">Services</a>
+      <a href="/#work">Work</a>
+      <a href="/blog/">Blog</a>
+      <a href="/#about">About</a>
+      <a href="/#contact" class="btn btn-small">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <article class="section article">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/#work">Work</a><span aria-hidden="true">/</span><span aria-current="page">AR Notes — Notes, Lists and Reminders</span></nav>
+      <p class="eyebrow">Apps · Own product · Android</p>
+      <h1>AR Notes — Notes, Lists and Reminders</h1>
+      <p class="lead">A notes app for Android with checklists, colours, labels and reminders that work without a calendar app. It imports notes from Google Keep, has five visual styles with light and dark mode, and keeps every note on the phone with backup and restore.</p>
+      <div class="player"><video controls preload="none" playsinline poster="/images/ar-notes.jpg" width="1280" height="720"><source src="/videos/ar-notes-demo.mp4" type="video/mp4">Your browser cannot play this video. <a href="/videos/ar-notes-demo.mp4">Download it</a>.</video></div>
+      <div class="prose">
+        
+        <h2>Technology</h2>
+        <div class="tags"><span class="tag">Android</span><span class="tag">Capacitor</span><span class="tag">JavaScript</span><span class="tag">Offline-first</span></div>
+        
+      </div>
+    </article>
+    <section class="section">
+      <div class="section-head"><p class="eyebrow">More work</p><h2>Other projects</h2></div>
+      <div class="grid projects"><article class="card project reveal" data-category="Apps">
+          <a class="thumb" href="/projects/ar-reader-android/" tabindex="-1" aria-hidden="true"><span class="thumb-label">Apps</span></a>
+          <div class="project-body">
+            <div class="project-meta"><span class="cat">Apps</span><span class="client">Own product</span></div>
+            <h3><a href="/projects/ar-reader-android/">AR Reader — Android Document Reader</a></h3>
+            <p>A native Android reader for PDF, EPUB, Word, Excel, PowerPoint, comics and images, with themes and in-document search. Built-in tools: scan to PDF, draw on a PDF, compress and convert images, and remove photo backgrounds. The app has no internet permission, so files never leave the phone.</p>
+            <div class="tags"><span class="tag">Kotlin</span><span class="tag">Jetpack Compose</span><span class="tag">Material 3</span><span class="tag">ML Kit</span></div>
+            <div class="project-links">
+              
+              <a href="/projects/ar-reader-android/">Read more →</a>
+              
+            </div>
+          </div>
+        </article><article class="card project reveal" data-category="Apps">
+          <button class="thumb" type="button" data-video="/videos/salary-tracker-demo.mp4" data-title="AR Salary Tracker" data-poster="/images/salary-tracker.jpg" aria-label="Play video: AR Salary Tracker"><img src="/images/salary-tracker.jpg" alt="AR Salary Tracker — demo video preview" width="1280" height="720" loading="lazy" decoding="async"><span class="play" aria-hidden="true">▶</span></button>
+          <div class="project-body">
+            <div class="project-meta"><span class="cat">Apps</span><span class="client">Own product · Android</span></div>
+            <h3><a href="/projects/ar-salary-tracker/">AR Salary Tracker</a></h3>
+            <p>A simple app for daily-wage workers: enter the salary per day and overtime per hour once, tap P for each day worked, and see totals for every 15-day period and the full month. Works with no internet, keeps data on the phone, and has backup and restore.</p>
+            <div class="tags"><span class="tag">Android</span><span class="tag">JavaScript</span><span class="tag">Offline-first</span></div>
+            <div class="project-links">
+              <button type="button" data-video="/videos/salary-tracker-demo.mp4" data-title="AR Salary Tracker" data-poster="/images/salary-tracker.jpg">Watch demo ▶</button>
+              <a href="/projects/ar-salary-tracker/">Read more →</a>
+              <a href="https://github.com/ABDURREHMAN629/salary-tracker" target="_blank" rel="noopener">Source ↗</a>
+            </div>
+          </div>
+        </article><article class="card project reveal" data-category="Apps">
+          <a class="thumb" href="/projects/android-utility-apps/" tabindex="-1" aria-hidden="true"><span class="thumb-label">Apps</span></a>
+          <div class="project-body">
+            <div class="project-meta"><span class="cat">Apps</span><span class="client">Own products</span></div>
+            <h3><a href="/projects/android-utility-apps/">Android Utility Apps</a></h3>
+            <p>AR Stride — offline fitness with step tracking, GPS runs on offline maps, a 30-day training plan, yoga and breathing exercises. VoltCore — a live battery and charging monitor showing amps, watts, volts and temperature. Both work offline and keep data on the device.</p>
+            <div class="tags"><span class="tag">Kotlin</span><span class="tag">Jetpack Compose</span><span class="tag">SQLite</span></div>
+            <div class="project-links">
+              
+              <a href="/projects/android-utility-apps/">Read more →</a>
+              
+            </div>
+          </div>
+        </article></div>
+    </section>
+    <section class="section contact" id="contact">
+      <p class="eyebrow">Contact</p>
+      <h2>Tell me the problem. I will show you the fix.</h2>
+      <p class="contact-sub">Have a similar problem in your business? Describe it and I will reply with how I would solve it.</p>
+      <div class="contact-actions"><a class="btn" href="https://www.linkedin.com/in/abdur-rehman-ar03247440629" target="_blank" rel="noopener">Connect on LinkedIn ↗</a><a class="btn btn-ghost" href="mailto:gabdurrehman493@gmail.com" target="_blank" rel="noopener">Email me</a><a class="btn btn-ghost" href="https://wa.me/923247440629" target="_blank" rel="noopener">WhatsApp</a><a class="btn btn-ghost" href="https://github.com/ABDURREHMAN629" target="_blank" rel="noopener">GitHub</a><a class="btn btn-ghost" href="/files/Abdur-Rehman-CV.pdf" target="_blank" rel="noopener">Download CV</a></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <p class="footer-name">Abdur Rehman</p>
+        <p>ERP Developer and AI &amp; Automation Engineer. Custom ERP software, AI assistants and automation for factories and businesses in Pakistan and worldwide.</p>
+        <p>Shahkot, Nankana Sahib, Pakistan · <a href="https://wa.me/923247440629" target="_blank" rel="noopener">+92 324 7440629</a> · <a href="mailto:gabdurrehman493@gmail.com">gabdurrehman493@gmail.com</a></p>
+      </div>
+      <nav aria-label="Projects">
+        <p class="footer-head">Projects</p>
+        <a href="/projects/textile-mill-erp/">Textile Mill ERP</a>
+        <a href="/projects/erp-ai-assistant/">ERP Assistant — Ask the System by Text or Voice</a>
+        <a href="/projects/ai-machine-safety-system/">AI Machine-Safety Interlock</a>
+        <a href="/projects/erp-reporting-backup-automation/">Reporting, Backup &amp; Audit Automation</a>
+        <a href="/projects/access-to-mysql-migration/">Legacy Access to MySQL Migration</a>
+        <a href="/projects/ar-developer-mesh-private-network/">AR-Developer Mesh — Private Network</a>
+      </nav>
+      <nav aria-label="Articles">
+        <p class="footer-head">Articles</p>
+        <a href="/blog/signs-your-factory-has-outgrown-excel-and-access/">7 Signs Your Factory Has Outgrown Excel and Microsoft Access</a>
+        <a href="/blog/ms-access-to-mysql-migration/">MS Access to MySQL Migration Without Losing Data</a>
+        <a href="/blog/textile-mill-erp-what-it-must-track/">What a Textile Mill ERP Must Track: From Greige to Dispatch</a>
+        <a href="/blog/custom-erp-vs-ready-made-software/">Custom ERP vs Ready-Made Software: How to Choose</a>
+        <a href="/blog/ai-assistant-inside-erp/">Adding an AI Assistant to an ERP: What Really Works</a>
+        <a href="/blog/">All articles →</a>
+      </nav>
+    </div>
+    <div class="footer-bar"><span>© 2026 Abdur Rehman. All rights reserved.</span><a href="#main">Back to top ↑</a></div>
+  </footer>
+
+  <div class="modal" id="videoModal" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-bar"><span id="modalTitle"></span><button class="modal-close" data-close aria-label="Close video">✕</button></div>
+      <div class="modal-media" id="modalMedia"></div>
+    </div>
+  </div>
+  <script src="/main.js" defer></script>
+</body>
+</html>

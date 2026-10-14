@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Much Is Where? Modelling a Multi-Stage Production Flow</title>
+  <meta name="description" content="The hardest part of a production ERP is not the code. It is the data model, and the transactions that stop a half-saved entry from quietly corrupting your reports.">
+  <meta name="keywords" content="production data model, database design for manufacturing, MySQL transactions, data integrity ERP, work in progress tracking">
+  <meta name="author" content="Abdur Rehman">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1, max-snippet:-1">
+  <link rel="canonical" href="https://abdurrehman629.github.io/blog/production-flow-data-model-and-transactions/">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#0b0e14">
+  
+  
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Abdur Rehman">
+  <meta property="og:title" content="How Much Is Where? Modelling a Multi-Stage Production Flow">
+  <meta property="og:description" content="The hardest part of a production ERP is not the code. It is the data model, and the transactions that stop a half-saved entry from quietly corrupting your reports.">
+  <meta property="og:url" content="https://abdurrehman629.github.io/blog/production-flow-data-model-and-transactions/">
+  <meta property="og:image" content="https://abdurrehman629.github.io/images/og-image.jpg">
+  <meta property="og:locale" content="en_US">
+  <meta property="article:published_time" content="2026-10-13T00:00:00+05:00">
+  <meta property="article:author" content="Abdur Rehman">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How Much Is Where? Modelling a Multi-Stage Production Flow">
+  <meta name="twitter:description" content="The hardest part of a production ERP is not the code. It is the data model, and the transactions that stop a half-saved entry from quietly corrupting your reports.">
+  <meta name="twitter:image" content="https://abdurrehman629.github.io/images/og-image.jpg">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="alternate" type="application/rss+xml" title="Abdur Rehman — Blog" href="/feed.xml">
+  <script>
+    // Dark is the default. Apply a saved choice before the page paints, so it never flashes.
+    document.documentElement.classList.add("js");
+    try { if (localStorage.getItem("theme") === "light") document.documentElement.setAttribute("data-theme", "light"); } catch (e) {}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://abdurrehman629.github.io/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://abdurrehman629.github.io/blog/"},{"@type":"ListItem","position":3,"name":"How Much Is Where? Modelling a Multi-Stage Production Flow","item":"https://abdurrehman629.github.io/blog/production-flow-data-model-and-transactions/"}]},{"@type":"BlogPosting","@id":"https://abdurrehman629.github.io/blog/production-flow-data-model-and-transactions/#article","mainEntityOfPage":"https://abdurrehman629.github.io/blog/production-flow-data-model-and-transactions/","headline":"How Much Is Where? Modelling a Multi-Stage Production Flow","description":"The hardest part of a production ERP is not the code. It is the data model, and the transactions that stop a half-saved entry from quietly corrupting your reports.","datePublished":"2026-10-13T00:00:00+05:00","dateModified":"2026-10-13T00:00:00+05:00","author":{"@id":"https://abdurrehman629.github.io/#person"},"publisher":{"@id":"https://abdurrehman629.github.io/#person"},"image":"https://abdurrehman629.github.io/images/og-image.jpg","keywords":"production data model, database design for manufacturing, MySQL transactions, data integrity ERP, work in progress tracking","wordCount":681,"inLanguage":"en"},{"@type":"Person","@id":"https://abdurrehman629.github.io/#person","name":"Abdur Rehman","url":"https://abdurrehman629.github.io/","image":"https://abdurrehman629.github.io/images/profile.jpg","jobTitle":"ERP Developer and AI & Automation Engineer","sameAs":["https://www.linkedin.com/in/abdur-rehman-ar03247440629","https://github.com/ABDURREHMAN629"]}]}</script>
+  
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav" id="nav">
+    <a href="/" class="brand" aria-label="Abdur Rehman — home"><span class="brand-mark">AR</span><span>Abdur Rehman</span></a>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode" title="Switch to light mode"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+    <nav class="nav-links" id="navLinks" aria-label="Main">
+      <a href="/#problems">Solutions</a>
+      <a href="/#services">Services</a>
+      <a href="/#work">Work</a>
+      <a href="/blog/">Blog</a>
+      <a href="/#about">About</a>
+      <a href="/#contact" class="btn btn-small">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <article class="section article">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/blog/">Blog</a><span aria-hidden="true">/</span><span aria-current="page">How Much Is Where? Modelling a Multi-Stage Production Flow</span></nav>
+      <p class="eyebrow">13 October 2026 · 3 min read</p>
+      <h1>How Much Is Where? Modelling a Multi-Stage Production Flow</h1>
+      <p class="lead">The hardest part of a production ERP is not the code. It is the data model, and the transactions that stop a half-saved entry from quietly corrupting your reports.</p>
+      <div class="prose">
+        <p>The hardest part of building a production system is not the code. It is the model.</p>
+<p>Here is the problem in plain words. Material arrives. It is issued to production. It passes through several stages, one after another. On the way some of it is rejected, some is reprocessed, and at the end what is left is packed and shipped.</p>
+<p>Now answer this, at any moment: <strong>how much is where?</strong></p>
+<p>It sounds simple. It is not.</p>
+<h2 id="three-things-that-make-it-hard">Three things that make it hard</h2>
+<h3 id="1-the-same-material-must-never-be-counted-twice">1. The same material must never be counted twice</h3>
+<p>A quantity can be issued, in production and partly finished all at once, depending on who is looking. If two screens can both claim the same metres, your totals are fiction.</p>
+<h3 id="2-quantities-do-not-survive-the-journey">2. Quantities do not survive the journey</h3>
+<p>What goes in is not what comes out. There is loss, rejection and reprocessing. A model that assumes nothing is lost will be wrong on the first day it meets a real factory.</p>
+<h3 id="3-one-batch-can-split-and-pieces-can-join">3. One batch can split, and pieces can join</h3>
+<p>So the flow is not a straight line. It branches and joins. The totals must hold whichever path you follow.</p>
+<h2 id="the-rule-i-settled-on">The rule I settled on</h2>
+<blockquote><p>The database must make a wrong state impossible to write. Not unlikely. Impossible.</p></blockquote>
+<p>A check in the screen can be skipped. A rule inside the database cannot. So the links between records, and the limits on quantities, are enforced by the database itself, not by hope.</p>
+<p>One example: each stage refuses to receive more than the stage before it delivered. That single rule catches most typing mistakes at the moment they happen, while the operator is still standing at the machine.</p>
+<h2 id="pen-and-paper-first">Pen and paper first</h2>
+<p>I spent far longer with a pen and paper than in a code editor, and it was the best time I spent on the whole project. You cannot code your way out of a wrong model. Every hour of modelling saved me days of fixing.</p>
+<p>Understand the business before you design the tables. The tables are where that understanding lives.</p>
+<h2 id="the-bug-that-taught-me-what-transactions-are-for">The bug that taught me what transactions are for</h2>
+<p>One &quot;save&quot; in a production system is rarely one thing. Saving a production entry may write the main record, several detail lines and a running status. Three or four writes that only make sense together.</p>
+<p>My early code did them one after another. Then one failed in the middle.</p>
+<p>The first two writes were already saved. The third was not. The database now held a record that could never exist in real life: an entry that was only half itself.</p>
+<p>Nothing looked broken. There was no error screen. Just quietly, permanently wrong data, waiting to be found by someone reading a report a week later.</p>
+<p>That is the worst kind of bug. It does not crash. It lies.</p>
+<h2 id="the-fix-all-of-it-or-none-of-it">The fix: all of it, or none of it</h2>
+<p>A transaction groups the writes. Begin, do every write, and keep them only if every one succeeded. If anything fails, undo everything, as if nothing had been tried.</p>
+<p>Transactions are now used everywhere in the system where one action touches more than one place.</p>
+<p>I used to think transactions were an advanced subject for banks. They are for anyone whose save writes more than one row. That is almost everyone.</p>
+<h2 id="why-a-business-owner-should-care">Why a business owner should care</h2>
+<p>A crash is a good day. A crash tells you something went wrong. Silent wrong data tells you nothing, and you find out when someone makes a decision on numbers that were never true.</p>
+<p>When you look at any production software, ask two questions:</p>
+<ol><li>If the power fails in the middle of a save, what is left in the database?</li><li>Can the system ever show more finished goods than the material that was issued?</li></ol>
+<p>A good system has a clear answer to both.</p>
+<p>Protect the data. Everything else can be recovered.</p>
+<p>You can see this model working in the <a href="/projects/textile-mill-erp/">textile mill ERP</a>. For the wider picture, read <a href="/blog/textile-mill-erp-what-it-must-track/">what a textile mill ERP must track</a>.</p>
+      </div>
+      <aside class="author card">
+        <div class="avatar avatar-small"><img src="/images/profile.jpg" alt="Abdur Rehman" width="520" height="520" loading="lazy"></div>
+        <div>
+          <p class="footer-head">Written by Abdur Rehman</p>
+          <p>ERP Developer and AI &amp; Automation Engineer. I built and run the ERP of a working textile mill, and I build ERP software, AI assistants and automation for other businesses.</p>
+          <p><a href="/#contact">Tell me about your problem →</a> · <a href="/#work">See my projects →</a></p>
+        </div>
+      </aside>
+    </article>
+    <section class="section">
+      <div class="section-head"><p class="eyebrow">Keep reading</p><h2>More articles</h2></div>
+      <div class="grid posts"><article class="card post-card reveal">
+          <p class="service-num">13 October 2026 · 3 min read</p>
+          <h3><a href="/blog/signs-your-factory-has-outgrown-excel-and-access/">7 Signs Your Factory Has Outgrown Excel and Microsoft Access</a></h3>
+          <p>Excel and Access work well for a small business. These seven signs show when they have started to cost you time, money and trust in your own numbers.</p>
+          <a class="more" href="/blog/signs-your-factory-has-outgrown-excel-and-access/">Read article →</a>
+        </article><article class="card post-card reveal">
+          <p class="service-num">13 October 2026 · 3 min read</p>
+          <h3><a href="/blog/ms-access-to-mysql-migration/">MS Access to MySQL Migration Without Losing Data</a></h3>
+          <p>A real Microsoft Access to MySQL migration for a textile mill. What broke, how I fixed it, and the one rule that made the migration safe to run again and again.</p>
+          <a class="more" href="/blog/ms-access-to-mysql-migration/">Read article →</a>
+        </article><article class="card post-card reveal">
+          <p class="service-num">13 October 2026 · 4 min read</p>
+          <h3><a href="/blog/textile-mill-erp-what-it-must-track/">What a Textile Mill ERP Must Track: From Greige to Dispatch</a></h3>
+          <p>A textile processing mill is not a normal inventory business. Here is what an ERP has to track at every stage, from greige fabric receipt to packing and dispatch.</p>
+          <a class="more" href="/blog/textile-mill-erp-what-it-must-track/">Read article →</a>
+        </article></div>
+    </section>
+    <section class="section contact" id="contact">
+      <p class="eyebrow">Contact</p>
+      <h2>Tell me the problem. I will show you the fix.</h2>
+      <p class="contact-sub">Describe what is going wrong in your business or your current system. I will reply with how I would solve it.</p>
+      <div class="contact-actions"><a class="btn" href="https://www.linkedin.com/in/abdur-rehman-ar03247440629" target="_blank" rel="noopener">Connect on LinkedIn ↗</a><a class="btn btn-ghost" href="mailto:gabdurrehman493@gmail.com" target="_blank" rel="noopener">Email me</a><a class="btn btn-ghost" href="https://wa.me/923247440629" target="_blank" rel="noopener">WhatsApp</a><a class="btn btn-ghost" href="https://github.com/ABDURREHMAN629" target="_blank" rel="noopener">GitHub</a><a class="btn btn-ghost" href="/files/Abdur-Rehman-CV.pdf" target="_blank" rel="noopener">Download CV</a></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <p class="footer-name">Abdur Rehman</p>
+        <p>ERP Developer and AI &amp; Automation Engineer. Custom ERP software, AI assistants and automation for factories and businesses in Pakistan and worldwide.</p>
+        <p>Shahkot, Nankana Sahib, Pakistan · <a href="https://wa.me/923247440629" target="_blank" rel="noopener">+92 324 7440629</a> · <a href="mailto:gabdurrehman493@gmail.com">gabdurrehman493@gmail.com</a></p>
+      </div>
+      <nav aria-label="Projects">
+        <p class="footer-head">Projects</p>
+        <a href="/projects/textile-mill-erp/">Textile Mill ERP</a>
+        <a href="/projects/erp-ai-assistant/">ERP Assistant — Ask the System by Text or Voice</a>
+        <a href="/projects/ai-machine-safety-system/">AI Machine-Safety Interlock</a>
+        <a href="/projects/erp-reporting-backup-automation/">Reporting, Backup &amp; Audit Automation</a>
+        <a href="/projects/access-to-mysql-migration/">Legacy Access to MySQL Migration</a>
+        <a href="/projects/ar-developer-mesh-private-network/">AR-Developer Mesh — Private Network</a>
+      </nav>
+      <nav aria-label="Articles">
+        <p class="footer-head">Articles</p>
+        <a href="/blog/signs-your-factory-has-outgrown-excel-and-access/">7 Signs Your Factory Has Outgrown Excel and Microsoft Access</a>
+        <a href="/blog/ms-access-to-mysql-migration/">MS Access to MySQL Migration Without Losing Data</a>
+        <a href="/blog/textile-mill-erp-what-it-must-track/">What a Textile Mill ERP Must Track: From Greige to Dispatch</a>
+        <a href="/blog/custom-erp-vs-ready-made-software/">Custom ERP vs Ready-Made Software: How to Choose</a>
+        <a href="/blog/ai-assistant-inside-erp/">Adding an AI Assistant to an ERP: What Really Works</a>
+        <a href="/blog/">All articles →</a>
+      </nav>
+    </div>
+    <div class="footer-bar"><span>© 2026 Abdur Rehman. All rights reserved.</span><a href="#main">Back to top ↑</a></div>
+  </footer>
+
+  <div class="modal" id="videoModal" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-bar"><span id="modalTitle"></span><button class="modal-close" data-close aria-label="Close video">✕</button></div>
+      <div class="modal-media" id="modalMedia"></div>
+    </div>
+  </div>
+  <script src="/main.js" defer></script>
+</body>
+</html>
