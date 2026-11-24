@@ -114,6 +114,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://abdurrehman629.github.io/projects/ar-media-player-android/</loc>
+    <lastmod>2026-11-24</lastmod>
+    <priority>0.6</priority>
+    <image:image><image:loc>https://abdurrehman629.github.io/images/ar-media-player.jpg</image:loc></image:image>
+  </url>
+  <url>
     <loc>https://abdurrehman629.github.io/projects/ar-salary-tracker/</loc>
     <lastmod>2026-10-19</lastmod>
     <priority>0.6</priority>
