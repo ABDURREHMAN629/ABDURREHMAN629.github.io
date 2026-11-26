@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AR Media Player — Private Android Video Player | Abdur Rehman</title>
-  <meta name="description" content="A private Android video player that plays almost any format through VLC's engine, converts video to MP3, trims, compresses, zips and keeps private videos encrypted. No ads, no tracking.">
+  <meta name="description" content="A private Android video and music player that plays almost any format through VLC's engine, converts, trims, merges and makes GIFs, plays and downloads from links, and keeps private videos encrypted. No ads, no tracking.">
   <meta name="keywords" content="Kotlin, Jetpack Compose, Material 3, libVLC, Media3, Android Keystore, AES-256">
   <meta name="author" content="Abdur Rehman">
   <meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1, max-snippet:-1">
@@ -65,18 +65,20 @@
         <h2>What it does</h2>
         <ul>
           <li><strong>Plays almost everything</strong>: MKV, MP4, AVI, MOV, WEBM, HEVC, AV1 and more, with audio and subtitle tracks, speed from 0.25x to 4x, an equalizer, volume boost, sleep timer, background audio and picture-in-picture.</li>
-          <li><strong>Gestures</strong>: swipe for brightness, volume and seeking, double-tap to skip, pinch to zoom, and hold to play at 2x. While holding, slide to change the speed, then lock it or lock the screen.</li>
-          <li><strong>Converter</strong>: video to MP3 or M4A, trim, and compress or resize with the phone's hardware encoder, falling back to VLC for files the hardware can't read.</li>
-          <li><strong>Files</strong>: browse storage, copy, move and delete, and zip or unzip with AES-256 passwords.</li>
-          <li><strong>Downloads</strong>: save videos and audio from links in the quality you choose.</li>
-          <li><strong>Library</strong>: folders, search, continue watching, history and playlists.</li>
+          <li><strong>Player tools</strong>: A-B repeat, bookmarks shown on the seek bar, a picture preview while seeking, frame-by-frame stepping, saving the current frame as a photo, rotate and mirror, a night mode that evens out loud and quiet parts, subtitle size and colour, and a second subtitle shown at the top.</li>
+          <li><strong>Gestures you can set</strong>: swipe for brightness, volume and seeking, double-tap to skip, pinch to zoom, and hold to play faster. Each one can be changed or switched off.</li>
+          <li><strong>Music</strong>: a music tab with search, sorting and shuffle, a mini player, a home-screen widget, album art on the lock screen and an optional floating play/pause bubble.</li>
+          <li><strong>Converter</strong>: video to MP3 or M4A, trim, compress, merge several videos, cut out a part, make a GIF, save frames as pictures, and remove or replace the sound. It uses the phone's hardware encoder at the source's own bitrate, so files stay small, and falls back to VLC for files the hardware can't read.</li>
+          <li><strong>Online videos</strong>: play a link straight away, download it in the quality you choose, download only part of it, download a whole playlist, or schedule a download for later.</li>
+          <li><strong>Library</strong>: folders, search, favorites and your own tags, continue watching, history, and playlists you reorder by dragging.</li>
+          <li><strong>Files and storage</strong>: browse storage, view pictures and GIFs, copy, move and delete, zip or unzip with AES-256 passwords, clear the app's temporary files, and find duplicate videos.</li>
           <li><strong>Looks</strong>: dark, pure black, light or follow-phone themes with eight accent colours, and an animated splash screen.</li>
         </ul>
         <h2>Privacy by design</h2>
         <ul>
-          <li>No ads, analytics, crash reporting or accounts. The internet is used only when downloading.</li>
+          <li>No ads, analytics, crash reporting or accounts. The internet is used only for links you choose to play or download.</li>
           <li>Private videos are encrypted with AES-256-GCM in 1 MB chunks. The key is wrapped by a hardware-backed Android Keystore key, so the files can't be opened outside the app.</li>
-          <li>Optional app lock with PIN or fingerprint. Video names are hidden in notifications and on the lock screen, and the app can be hidden from Recent apps.</li>
+          <li>Optional app lock with PIN or fingerprint, and a decoy PIN that opens an empty-looking private folder. Video names are hidden in notifications and on the lock screen, and the app can be hidden from Recent apps.</li>
           <li>History, playlists and settings stay on the phone and are left out of backups.</li>
         </ul>
         <h2>Technology</h2>
